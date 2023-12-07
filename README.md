@@ -45,12 +45,13 @@ Sinta-se à vontade para contribuir para este projeto, relatando problemas, prop
 
 ## Autores
 
-- Alisson Pereira Ferreira
-- Emir Bráz de Araújo Marques Júnior
-- João Pedro Tavares Santos
-- Monique Rosa Moraes
-- Nícolas André Baümle
-- Rodrigo Guedes de Souza
+- Alisson Pereira Ferreira (Matrícula: 22250769, E-mail: alissonpef@gmail.com)
+- Emir Bráz de Araújo Marques Júnior (Matrícula: 18203862, E-mail: emirbraz.d2@gmail.com)
+- João Pedro Tavares Santos (Matrícula: 19102493, E-mail: j-pts@hotmail.com)
+- Monique Rosa Moraes (Matrícula: 19102195, E-mail: moniquedemoraes@hotmail.com)
+- Nícolas André Baümle (Matrícula: 19201494, E-mail: nicolasbaumle@gmail.com)
+- Régis Nyland Bloemer (Matrícula: 20102404, E-mail: regisnb1@gmail.com)
+- Rodrigo Guedes de Souza (Matrícula: 19204117, E-mail: guigoguedes2@gmail.com)
 
 --- 
 
