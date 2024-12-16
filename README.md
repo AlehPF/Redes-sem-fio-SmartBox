@@ -1,116 +1,158 @@
-# 📡 Projeto de Redes Sem Fio - **Smart Box**
+# Projeto de Redes Sem Fio - **Smart Box**
 
-## 📖 Descrição
-
-O projeto "Smart Box" foi desenvolvido para implementar uma solução de monitoramento autônomo para pontos de venda self-service no hall do campus **UFSC Araranguá**, utilizando **redes sem fio**, sensores e dispositivos IoT. O objetivo principal é garantir o controle de transações de venda de produtos através do uso de sensores de fim de curso e de peso, conectados a um sistema baseado em **ESP32-CAM**, **ESP32** e **Firebase**. A escolha do **4G** como meio de conexão foi determinada pela estabilidade da rede em comparação com as redes Wi-Fi disponíveis no campus, como a "eduroam".
-
-Este repositório contém os códigos implementados, incluindo a configuração de sensores, a captura de imagens com ESP32-CAM e o envio de dados para Firebase, além de um servidor Flask que simula a comunicação entre o sensor e a plataforma.
+Este repositório contém os códigos e configurações do projeto **Smart Box**, uma solução de monitoramento autônomo para pontos de venda self-service no hall do campus **UFSC Araranguá**, por meio de **redes sem fio**, sensores e dispositivos IoT. A aplicação visa garantir o controle de transações de venda de produtos utilizando **sensores de fim de curso** e **sensores de peso**, conectados a um sistema baseado em **ESP32-CAM**, **ESP32** e **Firebase**. Para maior estabilidade de rede, optou-se pela tecnologia **4G** em vez da rede Wi-Fi do campus.
 
 ---
 
-## 👥 Integrantes do Projeto
+## **Sumário**
 
-- **Alisson Pereira Ferreira**
-- **Emir Braz de Araújo Marques Júnior**
-- **João Pedro Tavares Santos**
-- **Monique Rosa Moraes**
-- **Nicolas Andre Baumle**
-- **Regis Nyland Bloemer**
+1. [Visão Geral](#visão-geral)  
+2. [Equipe Responsável](#equipe-responsável)  
+3. [Principais Funcionalidades](#principais-funcionalidades)  
+4. [Tecnologias Utilizadas](#tecnologias-utilizadas)  
+5. [Estrutura do Repositório](#estrutura-do-repositório)  
+6. [Como Executar](#como-executar)  
+7. [Conclusão](#conclusão)  
+8. [Imagens de Exemplo](#imagens-de-exemplo)  
+
+---
+
+## **Visão Geral**
+
+O **Smart Box** monitora de forma autônoma os pontos de venda self-service, controlando a abertura e fechamento da caixa, bem como a retirada dos produtos. Quando a caixa é aberta, um **sensor de fim de curso** aciona a **ESP32-CAM** para capturar imagens, que são armazenadas inicialmente no **SPIFFS** (sistema de arquivos do ESP32) e enviadas ao **Firebase**. Um **sensor de peso** (HX711 e célula de carga) é responsável por registrar a quantidade de produtos retirados, tornando o sistema completo para fins de supervisão e auditoria.
+
+---
+
+## **Equipe Responsável**
+
+- **Alisson Pereira Ferreira**  
+- **Emir Braz de Araújo Marques Júnior**  
+- **João Pedro Tavares Santos**  
+- **Monique Rosa Moraes**  
+- **Nicolas Andre Baumle**  
+- **Regis Nyland Bloemer**  
 - **Rodrigo Guedes de Souza**
 
 **Universidade Federal de Santa Catarina (UFSC) – Campus Araranguá**  
-Caixa Postal 88.905-120 – Araranguá – SC – Brasil
+Caixa Postal 88.905-120 – Araranguá – SC – Brasil  
 
 ---
 
-## ⚙️ Funcionalidades
+## **Principais Funcionalidades**
 
-- 📸 **Captura de Imagem ao Abrir:** Quando a caixa é aberta, o sensor de fim de curso aciona a captura de uma imagem pela ESP32-CAM.
-- 💾 **Armazenamento Local da Imagem:** A imagem é armazenada no sistema de arquivos **SPIFFS** (SPI Flash File System) da ESP32.
-- ☁️ **Envio para o Firebase:** Após a captura da imagem, os dados são enviados automaticamente para o Firebase, permitindo o acesso remoto e seguro às imagens.
+1. **Captura de Imagens**  
+   - Quando a caixa é aberta, o sensor de fim de curso aciona a ESP32-CAM para registrar o evento.
 
----
+2. **Monitoramento de Peso**  
+   - O sensor de peso detecta a retirada de produtos em tempo real, possibilitando controle das vendas self-service.
 
-## 🛠️ Componentes Utilizados
+3. **Armazenamento Local (SPIFFS) e em Nuvem (Firebase)**  
+   - As imagens registradas são salvas no SPIFFS do ESP32-CAM e enviadas automaticamente para o **Firebase**, permitindo acesso remoto e seguro.
 
-- 🛠️ **ESP32-CAM:** Módulo para captura de imagem e comunicação sem fio com o Firebase.
-- ☁️ **Firebase:** Plataforma de nuvem para armazenamento e gerenciamento de dados.
-- 🌐 **Flask:** Framework para desenvolvimento do servidor de comunicação.
-- 🚪 **Sensor de Fim de Curso (Limit Switch):** Sensor para detectar a abertura da caixa e ativar a captura de imagem.
-- ⚖️ **Sensor de Peso (HX711 e célula de carga de 5kg):** Sensor para monitorar a retirada de produtos da caixa.
-- 💾 **SPIFFS:** Sistema de arquivos para armazenar imagens localmente na ESP32.
+4. **Comunicação via 4G**  
+   - Utilizada para garantir maior estabilidade de conexão em relação à rede Wi-Fi "eduroam" do campus.
 
 ---
 
-## 🖥️ Modelagem do Sistema
+## **Tecnologias Utilizadas**
 
-A **Smart Box** é composta por um sistema de monitoramento de vendas baseado em um **ESP32** que comunica com sensores para registrar transações. O sensor de peso detecta a retirada de produtos da caixa, enquanto o sensor de fim de curso detecta a abertura e fechamento da tampa. A **ESP32-CAM** captura a imagem do cliente e envia as informações para o **Firebase**.
+### **Frontend (Simulação via Flask)**
+- **Python & Flask**: Criação de um servidor local que simula a troca de dados entre os sensores e a plataforma.
+
+### **Dispositivos IoT**
+- **ESP32-CAM**: Módulo para captura de imagem e comunicação sem fio.
+- **ESP32**: Gerenciamento dos sensores de peso e fim de curso.
+- **Sensor de Fim de Curso (Limit Switch)**: Detecta a abertura da tampa da caixa.
+- **Sensor de Peso (HX711 + célula de carga)**: Monitora a retirada de produtos.
+
+### **Plataforma de Nuvem**
+- **Firebase**: Armazenamento de imagens e dados; possibilita acesso remoto seguro.
 
 ---
 
-## 📂 Estrutura do Repositório
+## **Estrutura do Repositório**
 
-- **`Smartbox.c`**: Configura o ESP32-CAM para capturar fotos quando o sensor de fim de curso é acionado, armazenando-as no SPIFFS e enviando-as ao Firebase.
-- **`Interface.py`**: Formata o conteúdo a ser enviado durante a simulação da comunicação entre o sensor e o ESP32.
-- **`Server.py`**: Simula a troca de mensagens entre o sensor e a plataforma, funcionando como uma API.
-- **`Scale.c`**: Realiza a comunicação entre o sensor de peso e o servidor, conectando o sistema de monitoramento.
+```bash
+/Smart_Box
+├── Smartbox.c          # Código principal para ESP32-CAM
+├── interface.py        # Simula a comunicação de dados
+├── scale.c             # Código para o sensor de peso
+└── server.py           # Servidor Flask
+```
+
+- **`Smartbox.c`**: Configura a ESP32-CAM para capturar fotos quando o sensor de fim de curso é acionado, armazenando-as no SPIFFS e enviando-as ao Firebase.  
+- **`Interface.py`**: Simula a comunicação entre o ESP32 e o servidor Flask, formatando o conteúdo enviado.  
+- **`Server.py`**: Servidor Flask que recebe as requisições dos sensores e gerencia as transações.  
+- **`Scale.c`**: Gerencia o sensor de peso e envia leituras para o servidor.
 
 ---
 
-## 🛠️ Como Executar
+## **Como Executar**
 
-### 1. **Clonar o Repositório:**
+### 1. Clonar o Repositório
 
 ```bash
 git clone https://github.com/alissonpef/Smart_Box.git
 ```
 
-### 2. **Configurar o Firebase:**
+### 2. Configurar o Firebase
 
-- Configure o Firebase Console, crie um bucket de storage e baixe o arquivo `serviceAccountKey.json`.
-- Insira as credenciais no código `Smartbox.c`.
+1. No **Firebase Console**, crie um novo projeto e um bucket de armazenamento.  
+2. Baixe o arquivo `serviceAccountKey.json` e coloque-o na pasta `/config`.  
+3. Adicione as credenciais no firmware `Smartbox.c`.
 
-### 3. **Instalar Dependências no Servidor Flask:**
+### 3. Instalar Dependências do Servidor Flask
 
 ```bash
-pip install -r requirements.txt
+pip install -r server/requirements.txt
 ```
 
-### 4. **Upload para o ESP32-CAM:**
+### 4. Realizar Upload para o ESP32-CAM
 
-- Utilize o [Arduino IDE](https://www.arduino.cc/en/software) para compilar e fazer upload do arquivo `Smartbox.c` para o ESP32-CAM.
+1. Abra o [Arduino IDE](https://www.arduino.cc/en/software).  
+2. Configure a placa como **ESP32-CAM** e selecione a porta correta.  
+3. Faça o upload do arquivo `Smartbox.c` para a ESP32-CAM.
 
-### 5. **Executar o Servidor Flask:**
+### 5. Executar o Servidor Flask
 
 ```bash
+cd server
 python Server.py
 ```
 
-### 6. **Simular Dados com Interface.py:**
+O servidor Flask simulará a recepção e envio de dados entre a plataforma e os sensores.
 
-- Rode o arquivo `Interface.py` para visualizar as transações em tempo real.
+### 6. Simular Dados com `Interface.py`
+
+Para verificar as transações em tempo real, rode:
 
 ```bash
 python Interface.py
 ```
 
-### 7. **Conectar o Sensor de Peso:**
+### 7. Conectar o Sensor de Peso
 
-- Compile e envie o código `Scale.c` para o ESP32 utilizando a IDE de sua escolha (ex.: Arduino IDE).
+- Compile e envie o código `Scale.c` para o ESP32 utilizando a IDE de sua escolha (por exemplo, Arduino IDE).
 
-### 8. **Monitorar o Sistema:**
+### 8. Monitorar o Sistema
 
-- Verifique as imagens e dados enviados para o Firebase e os logs exibidos no terminal.
-
----
-
-## 🌟 Resumindo:
-
-O projeto **Smart Box** foi desenvolvido para criar uma interface autônoma de monitoramento para pontos de venda self-service, utilizando tecnologias de redes sem fio, sensores e integração com a nuvem através do Firebase. A implementação conta com a captura de imagens por ESP32-CAM, monitoramento de peso e transações, e o uso de um servidor Flask para simular a comunicação do sistema.
+- Verifique as imagens e dados enviados para o Firebase.
+- Observe os logs exibidos no terminal do servidor Flask.
 
 ---
 
-## 📷 Imagens de Exemplo
+## **Conclusão**
+
+O **Smart Box** une **tecnologias de redes sem fio**, **sensores**, **ESP32**, **ESP32-CAM** e **Firebase** para criar uma solução de monitoramento autônomo de pontos de venda self-service. A captação de imagens e medições de peso em tempo real, aliada à comunicação 4G, garante **estabilidade**, **confiabilidade** e **escalabilidade**. Futuras melhorias podem incluir integração com aplicativos móveis, geração de relatórios detalhados de vendas e aplicação de métodos de machine learning para análise de comportamento do consumidor.
+
+Em caso de dúvidas ou sugestões, **abra uma issue** ou envie um **pull request**.
+
+---
+
+## **Imagens de Exemplo**
 
 ![Pinout do ESP32-CAM](https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2020/03/ESP32-CAM-pinout-new.png?w=1000&quality=100&strip=all&ssl=1)
 
+*(Acima, um exemplo do pinout do ESP32-CAM. Você pode incluir outras imagens ou diagramas de arquitetura na pasta `/docs`.)*
+
+---
