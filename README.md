@@ -92,7 +92,7 @@ Caixa Postal 88.905-120 – Araranguá – SC – Brasil
 ### 1. Clonar o Repositório
 
 ```bash
-git clone https://github.com/alissonpef/Smart_Box.git
+git clone https://github.com/alissonpef/Projeto_IoT_SmartBox
 ```
 
 ### 2. Configurar o Firebase
